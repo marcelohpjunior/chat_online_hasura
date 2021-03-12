@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'chat_store.dart';
 
 class ChatPage extends StatefulWidget {
@@ -18,18 +19,67 @@ class _ChatPageState extends ModularState<ChatPage, ChatStore> {
       appBar: AppBar(
         title: Text('Chat Online'),
       ),
-      body: Observer(
-        builder: (context) => Center(
-            child: Text(
-          '${store.counter}',
-          style: TextStyle(fontSize: 18),
-        )),
-      ),
+      body: Observer(builder: (context) {
+        print(store.counter);
+        return Container(
+          child: ListView.builder(
+              itemCount: 20,
+              itemBuilder: (context, index) {
+                return Card(
+                  color: Theme.of(context).primaryColor,
+                  child: ListTile(
+                    title: Text("Usuário $index"),
+                    leading: GestureDetector(
+                      onTap: () {},
+                      child: CircleAvatar(
+                        child: Icon(
+                          FontAwesomeIcons.userAlt,
+                          size: 20,
+                        ),
+                        backgroundColor: Theme.of(context).accentColor,
+                      ),
+                    ),
+                    trailing: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 25,
+                          height: 25,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).accentColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Text(
+                              store.counter < index
+                                  ? "0"
+                                  : store.counter - index > 99
+                                      ? "+99"
+                                      : "${store.counter - index}",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorDark,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+        );
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           store.increment();
         },
-        child: Icon(Icons.add),
+        child: Icon(
+          FontAwesomeIcons.solidComment,
+          color: Theme.of(context).primaryColorDark,
+          size: 20,
+        ),
       ),
     );
   }
