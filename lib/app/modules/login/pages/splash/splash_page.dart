@@ -48,12 +48,15 @@ class SplashPageState extends State<SplashPage>
             AnimatedBuilder(
               animation: animation,
               builder: (context, child) {
-                return Opacity(
-                  opacity: _opacityTween.evaluate(animation),
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                    height: _sizeTween.evaluate(animation),
-                    width: _sizeTween.evaluate(animation),
+                return Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Opacity(
+                    opacity: _opacityTween.evaluate(animation),
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      height: _sizeTween.evaluate(animation),
+                      width: _sizeTween.evaluate(animation),
+                    ),
                   ),
                 );
               },

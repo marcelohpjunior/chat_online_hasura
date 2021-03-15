@@ -45,28 +45,34 @@ class LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                TextBorderInput(
-                  onChanged: (text) {
-                    print(text);
-                  },
-                  labelText: "E-mail",
-                  hintText: "email@email.com",
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 500),
                   child: TextBorderInput(
                     onChanged: (text) {
                       print(text);
                     },
-                    labelText: "Senha",
-                    hintText: "********",
-                    obscureText: true,
+                    labelText: "E-mail",
+                    hintText: "email@email.com",
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: 500),
+                    child: TextBorderInput(
+                      onChanged: (text) {
+                        print(text);
+                      },
+                      labelText: "Senha",
+                      hintText: "********",
+                      obscureText: true,
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30, bottom: 10),
                   child: ElevatedButton(
-                    onPressed: () async {
+                    onPressed: () {
                       Modular.to.navigate('/chat', replaceAll: true);
                     },
                     style: ButtonStyle(
@@ -78,7 +84,9 @@ class LoginPageState extends State<LoginPage> {
                         child: Text(
                           "ENTRAR",
                           style: TextStyle(
-                              color: Theme.of(context).primaryColorDark),
+                            color: Theme.of(context).primaryColorDark,
+                            fontWeight: FontWeight.bold,
+                          ),
                           textAlign: TextAlign.center,
                         ),
                       ),
