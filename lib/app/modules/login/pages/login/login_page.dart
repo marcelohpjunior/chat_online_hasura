@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
-  const LoginPage({this.title = "LoginPage"}) : super();
+  const LoginPage({this.title = "Login"}) : super();
   @override
   LoginPageState createState() => LoginPageState();
 }
@@ -13,73 +13,77 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
             padding:
                 const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-            child: Stack(
+            child: Column(
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 50),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/images/logo.png',
-                            height: 100,
-                            width: 100,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text(
-                              "Chat Online Hasura",
-                              style: TextStyle(fontSize: 30),
-                            ),
-                          ),
-                        ],
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 50),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/logo.png',
+                        height: 100,
+                        width: 100,
                       ),
-                    ),
-                    TextBorderInput(
-                      onChanged: (text) {
-                        print(text);
-                      },
-                      labelText: "E-mail",
-                      // labelFontSize: 20,
-                      hintText: "email@email.com",
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: TextBorderInput(
-                        onChanged: (text) {
-                          print(text);
-                        },
-                        labelText: "Senha",
+                      Container(
+                        // color: Colors.red,
+                        width: MediaQuery.of(context).size.width - 40,
+                        child: Center(
+                          child: Text(
+                            "Chat Online Hasura",
+                            style: TextStyle(fontSize: 25),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30, bottom: 10),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          Modular.to.navigate('/chat', replaceAll: true);
-                        },
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Theme.of(context).accentColor)),
+                    ],
+                  ),
+                ),
+                TextBorderInput(
+                  onChanged: (text) {
+                    print(text);
+                  },
+                  labelText: "E-mail",
+                  hintText: "email@email.com",
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: TextBorderInput(
+                    onChanged: (text) {
+                      print(text);
+                    },
+                    labelText: "Senha",
+                    hintText: "********",
+                    obscureText: true,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 30, bottom: 10),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      Modular.to.navigate('/chat', replaceAll: true);
+                    },
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).accentColor)),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(minWidth: 100),
+                      child: Container(
                         child: Text(
                           "ENTRAR",
                           style: TextStyle(
                               color: Theme.of(context).primaryColorDark),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),

@@ -63,11 +63,10 @@ class SplashPageState extends State<SplashPage>
               builder: (context, child) {
                 return Opacity(
                   opacity: _opacityTween.evaluate(animation),
-                  child: Text(
-                    "Chat Online Hasura",
-                    style: TextStyle(
-                        fontSize: _sizeTween.evaluate(animation) * 0.20),
-                  ),
+                  child: Text("Chat Online Hasura",
+                      style: TextStyle(
+                          fontSize: _sizeTween.evaluate(animation) * 0.20),
+                      textAlign: TextAlign.center),
                 );
               },
             ),

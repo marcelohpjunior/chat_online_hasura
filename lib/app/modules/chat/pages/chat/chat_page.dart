@@ -29,13 +29,23 @@ class _ChatPageState extends ModularState<ChatPage, ChatStore> {
                   content: Text("Tem certeza que deseja sair?"),
                   actions: <Widget>[
                     TextButton(
-                      child: Text("Não"),
+                      child: Text(
+                        "Não",
+                        style: TextStyle(
+                          color: Theme.of(context).accentColor,
+                        ),
+                      ),
                       onPressed: () {
                         Modular.to.pop();
                       },
                     ),
                     TextButton(
-                      child: Text("Sim"),
+                      child: Text(
+                        "Sim",
+                        style: TextStyle(
+                          color: Theme.of(context).accentColor,
+                        ),
+                      ),
                       onPressed: () {
                         Modular.to.navigate('/login', replaceAll: true);
                       },

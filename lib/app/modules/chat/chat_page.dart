@@ -6,7 +6,7 @@ import 'chat_store.dart';
 
 class ChatPage extends StatefulWidget {
   final String title;
-  const ChatPage({Key key, this.title = "Chat Online"}) : super(key: key);
+  const ChatPage({Key? key, this.title = "Chat Online"}) : super(key: key);
 
   @override
   _ChatPageState createState() => _ChatPageState();
