@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
-  const LoginPage({this.title = "Login"}) : super();
+  const LoginPage({Key? key, this.title = "Login"}) : super(key: key);
   @override
   LoginPageState createState() => LoginPageState();
 }
@@ -16,12 +16,11 @@ class LoginPageState extends State<LoginPage> {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding:
-                const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 50),
+                  padding: const EdgeInsets.only(top: 50, bottom: 50),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,12 +47,12 @@ class LoginPageState extends State<LoginPage> {
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: 500),
                   child: TextBorderInput(
-                    onChanged: (text) {
-                      print(text);
-                    },
-                    labelText: "E-mail",
-                    hintText: "email@email.com",
-                  ),
+                      onChanged: (text) {
+                        print(text);
+                      },
+                      labelText: "E-mail",
+                      hintText: "email@email.com",
+                      keyboardType: TextInputType.emailAddress),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
@@ -66,11 +65,12 @@ class LoginPageState extends State<LoginPage> {
                       labelText: "Senha",
                       hintText: "********",
                       obscureText: true,
+                      keyboardType: TextInputType.visiblePassword,
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30, bottom: 10),
+                  padding: const EdgeInsets.only(top: 40),
                   child: ElevatedButton(
                     onPressed: () {
                       Modular.to.navigate('/chat', replaceAll: true);
@@ -82,7 +82,7 @@ class LoginPageState extends State<LoginPage> {
                       constraints: BoxConstraints(minWidth: 100),
                       child: Container(
                         child: Text(
-                          "ENTRAR",
+                          "Entrar",
                           style: TextStyle(
                             color: Theme.of(context).primaryColorDark,
                             fontWeight: FontWeight.bold,
@@ -93,6 +93,26 @@ class LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, bottom: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Não possui uma conta? "),
+                      InkWell(
+                        onTap: () {
+                          Modular.to.pushNamed('/cadastro');
+                        },
+                        child: Text(
+                          "Cadastre-se",
+                          style: TextStyle(
+                            color: Theme.of(context).accentColor,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                )
               ],
             ),
           ),

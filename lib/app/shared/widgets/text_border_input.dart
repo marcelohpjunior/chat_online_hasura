@@ -6,18 +6,21 @@ class TextBorderInput extends StatelessWidget {
   final String? hintText;
   final bool obscureText;
   final Function(String)? onChanged;
+  final TextInputType? keyboardType;
   const TextBorderInput(
       {this.labelText,
       this.labelFontSize,
       this.hintText,
       this.obscureText = false,
-      this.onChanged})
+      this.onChanged,
+      this.keyboardType = TextInputType.text})
       : super();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: TextField(
+        keyboardType: TextInputType.text,
         onChanged: onChanged,
         obscureText: obscureText,
         decoration: InputDecoration(
