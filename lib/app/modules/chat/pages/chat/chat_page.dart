@@ -62,7 +62,10 @@ class _ChatPageState extends ModularState<ChatPage, ChatStore> {
                 itemCount: 20,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () => print("Card $index"),
+                    onTap: () {
+                      print("Card $index");
+                      Modular.to.pushNamed('mensagem');
+                    },
                     onLongPress: () => print("Card $index -> Opções"),
                     child: Card(
                       color: Theme.of(context).primaryColor,

@@ -9,7 +9,7 @@ class AppWidget extends StatelessWidget {
       title: 'Chat Online',
       debugShowCheckedModeBanner: false,
       theme: temaEscuro,
-      initialRoute: '/',
+      initialRoute: Modular.initialRoute,
     ).modular();
   }
 }
