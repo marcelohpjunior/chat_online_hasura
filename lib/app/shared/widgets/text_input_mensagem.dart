@@ -13,37 +13,45 @@ class TextInputMensagem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-            child: TextField(
-          maxLines: null,
-          controller: _controller,
-          decoration:
-              InputDecoration.collapsed(hintText: "Enviar uma mensagem..."),
-          onChanged: onChanged,
-        )),
-        Container(
-          child: Theme.of(context).platform == TargetPlatform.iOS
-              ? CupertinoButton(
-                  child: Text(
-                    "Enviar",
+    return SafeArea(
+      child: Row(
+        children: [
+          Expanded(
+              child: TextField(
+            maxLines: null,
+            controller: _controller,
+            decoration:
+                InputDecoration.collapsed(hintText: "Enviar uma mensagem..."),
+            onChanged: onChanged,
+          )),
+          Container(
+            child: Theme.of(context).platform == TargetPlatform.iOS
+                ? CupertinoButton(
+                    child: Text(
+                      "Enviar",
+                    ),
+                    onPressed: () {
+                      if (_controller.text != "") {
+                        onSendMessage();
+                        _controller.text = "";
+                      }
+                    },
+                  )
+                : IconButton(
+                    icon: Icon(
+                      Icons.send,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    onPressed: () {
+                      if (_controller.text != "") {
+                        onSendMessage();
+                        _controller.text = "";
+                      }
+                    },
                   ),
-                  onPressed: onSendMessage)
-              : IconButton(
-                  icon: Icon(
-                    Icons.send,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  onPressed: () {
-                    if (_controller.text != "") {
-                      onSendMessage();
-                      _controller.text = "";
-                    }
-                  },
-                ),
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }

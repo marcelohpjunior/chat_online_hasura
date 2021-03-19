@@ -51,7 +51,9 @@ class MensagemPageState extends State<MensagemPage> {
                                 padding: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color: Theme.of(context).primaryColor,
+                                  color: index % 2 == 1
+                                      ? Theme.of(context).primaryColor
+                                      : Theme.of(context).accentColor,
                                 ),
                                 child: Text(
                                   "$index Mensagem: $loren",
@@ -59,6 +61,9 @@ class MensagemPageState extends State<MensagemPage> {
                                       ? TextAlign.left
                                       : TextAlign.right,
                                   maxLines: null,
+                                  style: index % 2 == 1
+                                      ? TextStyle(color: Colors.white)
+                                      : TextStyle(color: Colors.black),
                                 ),
                               ),
                             ),
