@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class TextInputMensagem extends StatelessWidget {
   final Function(String)? onChanged;
   final Function() onSendMessage;
-  final controller = TextEditingController();
+  final _controller = TextEditingController();
   TextInputMensagem({
     Key? key,
     this.onChanged,
@@ -18,7 +18,7 @@ class TextInputMensagem extends StatelessWidget {
         Expanded(
             child: TextField(
           maxLines: null,
-          controller: controller,
+          controller: _controller,
           decoration:
               InputDecoration.collapsed(hintText: "Enviar uma mensagem..."),
           onChanged: onChanged,
@@ -36,9 +36,9 @@ class TextInputMensagem extends StatelessWidget {
                     color: Theme.of(context).accentColor,
                   ),
                   onPressed: () {
-                    if (controller.text != "") {
+                    if (_controller.text != "") {
                       onSendMessage();
-                      controller.text = "";
+                      _controller.text = "";
                     }
                   },
                 ),
