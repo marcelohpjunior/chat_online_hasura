@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -8,8 +10,8 @@ class ListaContatosWidget extends StatelessWidget {
   final String titulo;
   final String? fotoUrl;
   final bool showQtdMensagem;
-  final int qtdMensagem;
-  const ListaContatosWidget(
+  int qtdMensagem;
+  ListaContatosWidget(
       {Key? key,
       this.onTap,
       this.onLongPress,
@@ -25,13 +27,14 @@ class ListaContatosWidget extends StatelessWidget {
     return ListView.builder(
         itemCount: 20,
         itemBuilder: (context, index) {
+          qtdMensagem = Random().nextInt(200);
           return InkWell(
             onTap: onTap,
             onLongPress: onLongPress,
             child: Card(
               color: Theme.of(context).primaryColor,
               child: ListTile(
-                title: Text(titulo),
+                title: Text("$titulo $index"),
                 leading: InkWell(
                   onTap: onAvatarTap,
                   child: CircleAvatar(

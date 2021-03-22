@@ -7,19 +7,22 @@ class TextBorderInputWidget extends StatelessWidget {
   final bool obscureText;
   final Function(String)? onChanged;
   final TextInputType? keyboardType;
+  final TextEditingController? textEditingController;
   const TextBorderInputWidget(
       {this.labelText,
       this.labelFontSize,
       this.hintText,
       this.obscureText = false,
       this.onChanged,
-      this.keyboardType = TextInputType.text})
+      this.keyboardType = TextInputType.text,
+      this.textEditingController})
       : super();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: TextField(
+        controller: textEditingController,
         keyboardType: keyboardType,
         onChanged: onChanged,
         obscureText: obscureText,

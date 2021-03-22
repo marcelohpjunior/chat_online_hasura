@@ -26,6 +26,7 @@ class _NovoContatoDialogWidgetState
     extends ModularState<NovoContatoDialogWidget, NovoContatoStore> {
   @override
   Widget build(BuildContext context) {
+    var controller = TextEditingController();
     var _contato = "";
     return Observer(builder: (context) {
       return SimpleDialog(key: widget.key, children: <Widget>[
@@ -72,6 +73,7 @@ class _NovoContatoDialogWidgetState
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: 500),
                   child: TextBorderInputWidget(
+                      textEditingController: controller,
                       onChanged: (text) {
                         _contato = text;
                         print(text);
@@ -101,6 +103,8 @@ class _NovoContatoDialogWidgetState
                         onPressed: () {
                           print("Contato $_contato Adicionado");
                           _contato = "";
+                          controller.text = "";
+                          Modular.to.pop();
                         },
                         child: Text(
                           "Adicionar",
