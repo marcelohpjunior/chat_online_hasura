@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class TextBorderInput extends StatelessWidget {
+class TextBorderInputWidget extends StatelessWidget {
   final String? labelText;
   final double? labelFontSize;
   final String? hintText;
   final bool obscureText;
   final Function(String)? onChanged;
   final TextInputType? keyboardType;
-  const TextBorderInput(
+  const TextBorderInputWidget(
       {this.labelText,
       this.labelFontSize,
       this.hintText,
@@ -20,7 +20,7 @@ class TextBorderInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: TextField(
-        keyboardType: TextInputType.text,
+        keyboardType: keyboardType,
         onChanged: onChanged,
         obscureText: obscureText,
         decoration: InputDecoration(

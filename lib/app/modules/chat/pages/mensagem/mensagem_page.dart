@@ -1,4 +1,5 @@
-import 'package:chat_online_hasura/app/shared/widgets/text_input_mensagem.dart';
+import 'package:chat_online_hasura/app/modules/chat/widgets/mensagem_widget.dart';
+import 'package:chat_online_hasura/app/modules/chat/widgets/text_input_mensagem_widget.dart';
 
 import 'package:flutter/material.dart';
 
@@ -15,8 +16,6 @@ class MensagemPageState extends State<MensagemPage> {
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.width);
-    print(Theme.of(context).platform);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -35,40 +34,9 @@ class MensagemPageState extends State<MensagemPage> {
                   child: ListView.builder(
                     itemCount: 30,
                     itemBuilder: (context, index) {
-                      return Container(
-                        alignment: index % 2 == 1
-                            ? Alignment.centerLeft
-                            : Alignment.centerRight,
-                        child: Wrap(
-                          children: [
-                            ConstrainedBox(
-                              constraints: BoxConstraints(
-                                  maxWidth:
-                                      MediaQuery.of(context).size.width * 0.60),
-                              child: Container(
-                                margin:
-                                    const EdgeInsets.only(left: 20, bottom: 20),
-                                padding: const EdgeInsets.all(20),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: index % 2 == 1
-                                      ? Theme.of(context).primaryColor
-                                      : Theme.of(context).accentColor,
-                                ),
-                                child: Text(
-                                  "$index Mensagem: $loren",
-                                  textAlign: index % 2 == 1
-                                      ? TextAlign.left
-                                      : TextAlign.right,
-                                  maxLines: null,
-                                  style: index % 2 == 1
-                                      ? TextStyle(color: Colors.white)
-                                      : TextStyle(color: Colors.black),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      return MensagemWidget(
+                        index: index,
+                        mensagem: loren,
                       );
                     },
                     reverse: true,
@@ -78,12 +46,12 @@ class MensagemPageState extends State<MensagemPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: TextInputMensagem(
+                child: TextInputMensagemWidget(
                   onChanged: (text) {
                     print(text);
                     a = text;
                   },
-                  onSendMessage: () {
+                  enviaMensagem: () {
                     print("Msg enviada: $a");
                     a = "";
                   },

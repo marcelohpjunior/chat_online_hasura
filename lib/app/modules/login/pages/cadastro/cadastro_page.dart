@@ -1,4 +1,4 @@
-import 'package:chat_online_hasura/app/shared/widgets/text_border_input.dart';
+import 'package:chat_online_hasura/app/shared/widgets/text_border_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -26,7 +26,7 @@ class CadastroPageState extends State<CadastroPage> {
                   padding: const EdgeInsets.only(top: 30),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: 500),
-                    child: TextBorderInput(
+                    child: TextBorderInputWidget(
                       onChanged: (text) {
                         print(text);
                       },
@@ -40,7 +40,7 @@ class CadastroPageState extends State<CadastroPage> {
                   padding: const EdgeInsets.only(top: 10),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: 500),
-                    child: TextBorderInput(
+                    child: TextBorderInputWidget(
                         onChanged: (text) {
                           print(text);
                         },
@@ -53,7 +53,7 @@ class CadastroPageState extends State<CadastroPage> {
                   padding: const EdgeInsets.only(top: 30),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: 500),
-                    child: TextBorderInput(
+                    child: TextBorderInputWidget(
                       onChanged: (text) {
                         print(text);
                       },
@@ -67,7 +67,7 @@ class CadastroPageState extends State<CadastroPage> {
                   padding: const EdgeInsets.only(top: 30),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: 500),
-                    child: TextBorderInput(
+                    child: TextBorderInputWidget(
                       onChanged: (text) {
                         print(text);
                       },
@@ -81,7 +81,7 @@ class CadastroPageState extends State<CadastroPage> {
                   padding: const EdgeInsets.only(top: 10),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: 500),
-                    child: TextBorderInput(
+                    child: TextBorderInputWidget(
                       onChanged: (text) {
                         print(text);
                       },

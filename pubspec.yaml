@@ -10,6 +10,7 @@ vars:
 
 scripts:
   mobx: $runner build
+  mobxd: $runner build --delete-conflicting-outputs
   mobx_watch: $clean & $get & $runner watch
   mobx_build_clean: $clean & $get & $runner build --delete-conflicting-outputs
 

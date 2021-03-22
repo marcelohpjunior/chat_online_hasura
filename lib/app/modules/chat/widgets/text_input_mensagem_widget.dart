@@ -1,18 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class TextInputMensagem extends StatelessWidget {
+class TextInputMensagemWidget extends StatelessWidget {
   final Function(String)? onChanged;
-  final Function() onSendMessage;
+  final Function() enviaMensagem;
   final _controller = TextEditingController();
-  TextInputMensagem({
+
+  TextInputMensagemWidget({
     Key? key,
     this.onChanged,
-    required this.onSendMessage,
+    required this.enviaMensagem,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    _enviaMensagem() {
+      if (_controller.text != "") {
+        enviaMensagem();
+        _controller.text = "";
+      }
+    }
+
     return SafeArea(
       child: Row(
         children: [
@@ -30,24 +38,14 @@ class TextInputMensagem extends StatelessWidget {
                     child: Text(
                       "Enviar",
                     ),
-                    onPressed: () {
-                      if (_controller.text != "") {
-                        onSendMessage();
-                        _controller.text = "";
-                      }
-                    },
+                    onPressed: _enviaMensagem,
                   )
                 : IconButton(
                     icon: Icon(
                       Icons.send,
                       color: Theme.of(context).accentColor,
                     ),
-                    onPressed: () {
-                      if (_controller.text != "") {
-                        onSendMessage();
-                        _controller.text = "";
-                      }
-                    },
+                    onPressed: _enviaMensagem,
                   ),
           ),
         ],

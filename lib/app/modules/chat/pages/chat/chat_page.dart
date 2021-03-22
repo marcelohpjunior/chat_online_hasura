@@ -1,3 +1,5 @@
+import 'package:chat_online_hasura/app/modules/chat/widgets/lista_contatos_widget.dart';
+import 'package:chat_online_hasura/app/shared/widgets/sair_dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -24,105 +26,40 @@ class _ChatPageState extends ModularState<ChatPage, ChatStore> {
           showDialog(
               context: context,
               builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text("Sair"),
-                  content: Text("Tem certeza que deseja sair?"),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text(
-                        "Não",
-                        style: TextStyle(
-                          color: Theme.of(context).accentColor,
-                        ),
-                      ),
-                      onPressed: () {
-                        Modular.to.pop();
-                      },
-                    ),
-                    TextButton(
-                      child: Text(
-                        "Sim",
-                        style: TextStyle(
-                          color: Theme.of(context).accentColor,
-                        ),
-                      ),
-                      onPressed: () {
-                        Modular.to.navigate('/login', replaceAll: true);
-                      },
-                    )
-                  ],
+                return SairDialogWidget(
+                  onPressedNao: () {
+                    Modular.to.pop();
+                  },
+                  onPressedSim: () {
+                    Modular.to.navigate('/login', replaceAll: true);
+                  },
                 );
               });
           return true;
         },
         child: Observer(builder: (context) {
           print(store.counter);
-          return Container(
-            child: ListView.builder(
-                itemCount: 20,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      print("Card $index");
-                      Modular.to.pushNamed('mensagem');
-                    },
-                    onLongPress: () => print("Card $index -> Opções"),
-                    child: Card(
-                      color: Theme.of(context).primaryColor,
-                      child: ListTile(
-                        title: Text("Usuário $index"),
-                        leading: InkWell(
-                          onTap: () {
-                            print("foto perfil");
-                          },
-                          child: CircleAvatar(
-                            child: Icon(
-                              FontAwesomeIcons.userAlt,
-                              size: 20,
-                            ),
-                            backgroundColor: Theme.of(context).accentColor,
-                          ),
-                        ),
-                        trailing: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 25,
-                              height: 25,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).accentColor,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  store.counter < index
-                                      ? "0"
-                                      : store.counter - index > 99
-                                          ? "+99"
-                                          : "${store.counter - index}",
-                                  style: TextStyle(
-                                    color: Theme.of(context).primaryColorDark,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                }),
+          return ListaContatosWidget(
+            onTap: () {
+              Modular.to.pushNamed('mensagem');
+            },
+            onLongPress: () => print("Opções"),
+            titulo: "Usuário",
+            onAvatarTap: () {
+              print("foto perfil");
+            },
+            showQtdMensagem: true,
+            qtdMensagem: store.counter,
           );
         }),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          store.increment();
+          //store.increment();
+          Modular.to.pushNamed("contatos");
         },
         child: Icon(
-          FontAwesomeIcons.solidComment,
+          FontAwesomeIcons.solidCommentAlt,
           color: Theme.of(context).primaryColorDark,
           size: 20,
         ),
