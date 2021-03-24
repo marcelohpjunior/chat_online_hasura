@@ -1,3 +1,4 @@
+import 'package:chat_online_hasura/app/modules/login/pages/login/login_store.dart';
 import 'package:chat_online_hasura/app/shared/widgets/text_border_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -9,7 +10,9 @@ class LoginPage extends StatefulWidget {
   LoginPageState createState() => LoginPageState();
 }
 
-class LoginPageState extends State<LoginPage> {
+class LoginPageState extends ModularState<LoginPage, LoginStore> {
+  var email = '';
+  var senha = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +51,7 @@ class LoginPageState extends State<LoginPage> {
                   constraints: BoxConstraints(maxWidth: 500),
                   child: TextBorderInputWidget(
                       onChanged: (text) {
-                        print(text);
+                        email = text;
                       },
                       labelText: "E-mail",
                       hintText: "email@email.com",
@@ -60,7 +63,7 @@ class LoginPageState extends State<LoginPage> {
                     constraints: BoxConstraints(maxWidth: 500),
                     child: TextBorderInputWidget(
                       onChanged: (text) {
-                        print(text);
+                        senha = text;
                       },
                       labelText: "Senha",
                       hintText: "********",
@@ -72,7 +75,9 @@ class LoginPageState extends State<LoginPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 40),
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      await store.entrar(email, senha);
+                      print(store.usuarioModel?.email);
                       Modular.to.navigate('/chat', replaceAll: true);
                     },
                     style: ButtonStyle(

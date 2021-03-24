@@ -10,8 +10,8 @@ class ListaContatosWidget extends StatelessWidget {
   final String titulo;
   final String? fotoUrl;
   final bool showQtdMensagem;
-  int qtdMensagem;
-  ListaContatosWidget(
+  final int qtdMensagem;
+  const ListaContatosWidget(
       {Key? key,
       this.onTap,
       this.onLongPress,
@@ -27,7 +27,7 @@ class ListaContatosWidget extends StatelessWidget {
     return ListView.builder(
         itemCount: 20,
         itemBuilder: (context, index) {
-          qtdMensagem = Random().nextInt(200);
+          var qtdMensagens = Random().nextInt(150);
           return InkWell(
             onTap: onTap,
             onLongPress: onLongPress,
@@ -64,11 +64,11 @@ class ListaContatosWidget extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                qtdMensagem < index
+                                qtdMensagens < index
                                     ? "0"
-                                    : qtdMensagem - index > 99
+                                    : qtdMensagens > 99
                                         ? "+99"
-                                        : "${qtdMensagem - index}",
+                                        : "$qtdMensagens",
                                 style: TextStyle(
                                   color: Theme.of(context).primaryColorDark,
                                   fontSize: 12,

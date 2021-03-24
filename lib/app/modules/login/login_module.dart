@@ -1,5 +1,6 @@
 import 'package:chat_online_hasura/app/modules/login/pages/cadastro/cadastro_page.dart';
 import 'package:chat_online_hasura/app/modules/login/pages/cadastro/cadastro_store.dart';
+import 'package:chat_online_hasura/app/shared/repositories/login/login_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'pages/login/login_page.dart';
@@ -10,7 +11,7 @@ class LoginModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.lazySingleton((i) => CadastroStore()),
-    Bind.lazySingleton((i) => LoginStore()),
+    Bind.lazySingleton((i) => LoginStore(i.get<LoginRepository>())),
   ];
 
   @override
