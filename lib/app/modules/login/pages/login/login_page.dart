@@ -1,6 +1,7 @@
 import 'package:chat_online_hasura/app/modules/login/pages/login/login_store.dart';
 import 'package:chat_online_hasura/app/shared/widgets/text_border_input_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginPage extends StatefulWidget {
@@ -72,38 +73,64 @@ class LoginPageState extends ModularState<LoginPage, LoginStore> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 40),
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      await store.entrar(email, senha);
-                      print(store.usuarioModel?.email);
-                      Modular.to.navigate('/chat', replaceAll: true);
-                    },
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).accentColor)),
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(minWidth: 100),
-                      child: Container(
-                        child: Text(
-                          "Entrar",
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColorDark,
-                            fontWeight: FontWeight.bold,
+                Observer(builder: (_) {
+                  if (store.carregando)
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: CircularProgressIndicator(),
+                    );
+
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        store.setCarregando(true);
+
+                        await store.entrar(email, senha);
+
+                        store.setCarregando(false);
+
+                        if (store.erro == null && store.usuarioModel != null) {
+                          Modular.to.navigate('/chat', replaceAll: true);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Colors.red,
+                              content: const Text(
+                                'Erro ao efetuar login',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          );
+                        }
+                        print(store.usuarioModel?.email);
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Theme.of(context).accentColor)),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(minWidth: 100),
+                        child: Container(
+                          child: Text(
+                            "Entrar",
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColorDark,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                }),
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Não possui uma conta? "),
+                      Text("Não possui uma conta  "),
                       InkWell(
                         onTap: () {
                           Modular.to.pushNamed('/cadastro');

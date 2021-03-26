@@ -12,22 +12,28 @@ class LoginRepository extends ILoginRepository {
 
   @override
   Future<UsuarioModel?> entrar(email, senha) async {
-    var resultado = await hasura.query(
-        ''' query entrar(\$email: String!, \$senha: String!) {
-  usuarios(where: {email: {_eq: \$email}, _and: {senha: {_eq: \$senha}}}) {
-    id_usuario
-    email
-    senha
-    nome
-    sobrenome
-    telefone
-  }
-}
-''',
-        variables: {"email": email, "senha": senha});
+    const query = '''
+    query entrar(\$email: String!, \$senha: String!) {
+      usuarios(where: {email: {_eq: \$email}, _and: {senha: {_eq: \$senha}}}) {
+        id_usuario
+        email
+        senha
+        nome
+        sobrenome
+        telefone
+      }
+    }
+  ''';
 
-    UsuarioModel usuarioModel =
-        UsuarioModel.fromJson(resultado['data']['usuarios'][0]);
-    return usuarioModel;
+    var resultado = await hasura.query(query, variables: {
+      "email": email,
+      "senha": senha
+    }).then((value) => value['data']['usuarios']);
+
+    if (resultado.isEmpty) {
+      return null;
+    }
+
+    return UsuarioModel.fromJson(resultado);
   }
 }

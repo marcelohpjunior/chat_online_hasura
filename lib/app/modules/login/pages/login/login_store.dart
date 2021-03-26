@@ -8,12 +8,20 @@ class LoginStore = _LoginStoreBase with _$LoginStore;
 
 abstract class _LoginStoreBase with Store {
   final ILoginRepository repository;
+
   _LoginStoreBase(this.repository);
 
   @observable
   int value = 0;
+
+  @observable
+  bool carregando = false;
+
   @observable
   UsuarioModel? usuarioModel;
+
+  @observable
+  Object? erro;
 
   @action
   void increment() {
@@ -21,7 +29,29 @@ abstract class _LoginStoreBase with Store {
   }
 
   @action
-  entrar(email, senha) async {
-    usuarioModel = await repository.entrar(email, senha);
+  Future<bool> entrar(String email, String senha) async {
+    try {
+      if (!_validaEmailSenha(email, senha)) return false;
+
+      usuarioModel = await repository.entrar(email, senha);
+      erro = null;
+
+      return true;
+    } catch (e) {
+      erro = e;
+      return false;
+    }
+  }
+
+  _validaEmailSenha(String email, String senha) {
+    if (email.isEmpty || senha.isEmpty) {
+      return false;
+    }
+    return true;
+  }
+
+  @action
+  setCarregando(bool carregar) async {
+    carregando = carregar;
   }
 }
