@@ -53,7 +53,7 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
                   constraints: BoxConstraints(maxWidth: 500),
                   child: TextBorderInputWidget(
                       onChanged: (text) {
-                        email = text;
+                        email = text.trim();
                       },
                       labelText: "E-mail",
                       hintText: "email@email.com",
@@ -92,21 +92,20 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
                         controller.setCarregando(false);
 
                         if (controller.erro == null &&
-                            controller.usuarioModel != null) {
+                            controller.usuario != null) {
                           Modular.to.navigate('/chat', replaceAll: true);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               backgroundColor: Colors.red,
-                              content: const Text(
-                                'Erro ao efetuar login',
+                              content: Text(
+                                controller.erro.toString(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
                           );
                         }
-                        print(controller.usuarioModel?.email);
                       },
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
@@ -132,7 +131,7 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Não possui uma conta  "),
+                      Text("Não possui uma conta? "),
                       InkWell(
                         onTap: () {
                           Modular.to.pushNamed('/cadastro');

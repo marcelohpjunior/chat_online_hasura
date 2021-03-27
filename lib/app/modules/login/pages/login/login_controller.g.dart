@@ -39,31 +39,31 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
-  final _$usuarioModelAtom = Atom(name: '_LoginControllerBase.usuarioModel');
+  final _$usuarioAtom = Atom(name: '_LoginControllerBase.usuario');
 
   @override
-  UsuarioModel? get usuarioModel {
-    _$usuarioModelAtom.reportRead();
-    return super.usuarioModel;
+  Usuario? get usuario {
+    _$usuarioAtom.reportRead();
+    return super.usuario;
   }
 
   @override
-  set usuarioModel(UsuarioModel? value) {
-    _$usuarioModelAtom.reportWrite(value, super.usuarioModel, () {
-      super.usuarioModel = value;
+  set usuario(Usuario? value) {
+    _$usuarioAtom.reportWrite(value, super.usuario, () {
+      super.usuario = value;
     });
   }
 
   final _$erroAtom = Atom(name: '_LoginControllerBase.erro');
 
   @override
-  Object? get erro {
+  ErrorException? get erro {
     _$erroAtom.reportRead();
     return super.erro;
   }
 
   @override
-  set erro(Object? value) {
+  set erro(ErrorException? value) {
     _$erroAtom.reportWrite(value, super.erro, () {
       super.erro = value;
     });
@@ -103,7 +103,7 @@ mixin _$LoginController on _LoginControllerBase, Store {
     return '''
 value: ${value},
 carregando: ${carregando},
-usuarioModel: ${usuarioModel},
+usuario: ${usuario},
 erro: ${erro}
     ''';
   }

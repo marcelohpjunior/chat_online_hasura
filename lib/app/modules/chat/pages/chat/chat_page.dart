@@ -38,7 +38,6 @@ class _ChatPageState extends ModularState<ChatPage, ChatController> {
           return true;
         },
         child: Observer(builder: (context) {
-          print(controller.counter);
           return ListaContatosWidget(
             onTap: () {
               Modular.to.pushNamed('mensagem');

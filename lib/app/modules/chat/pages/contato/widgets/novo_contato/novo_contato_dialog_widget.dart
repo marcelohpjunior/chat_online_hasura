@@ -76,7 +76,6 @@ class _NovoContatoDialogWidgetState
                       textEditingController: textEditingController,
                       onChanged: (text) {
                         _contato = text;
-                        print(text);
                       },
                       labelText: controller.value == 0 ? "E-mail" : "Telefone",
                       hintText: controller.value == 0

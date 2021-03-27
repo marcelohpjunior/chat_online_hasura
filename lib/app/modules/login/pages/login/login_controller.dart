@@ -1,4 +1,5 @@
-import 'package:chat_online_hasura/app/shared/models/usuario_model.dart';
+import 'package:chat_online_hasura/app/shared/models/error_exception.dart';
+import 'package:chat_online_hasura/app/shared/models/usuario.dart';
 import 'package:chat_online_hasura/app/shared/repositories/login/ilogin_repository.dart';
 import 'package:mobx/mobx.dart';
 
@@ -18,10 +19,10 @@ abstract class _LoginControllerBase with Store {
   bool carregando = false;
 
   @observable
-  UsuarioModel? usuarioModel;
+  Usuario? usuario;
 
   @observable
-  Object? erro;
+  ErrorException? erro;
 
   @action
   void increment() {
@@ -33,18 +34,25 @@ abstract class _LoginControllerBase with Store {
     try {
       if (!_validaEmailSenha(email, senha)) return false;
 
-      usuarioModel = await repository.entrar(email, senha);
-      erro = null;
+      usuario = await repository.entrar(email, senha);
+      erro = usuario == null
+          ? ErrorException(message: 'Usuário não encontrado!')
+          : null;
 
       return true;
     } catch (e) {
-      erro = e;
+      erro = ErrorException(message: "Ocorreu um erro inesperado!");
       return false;
     }
   }
 
   _validaEmailSenha(String email, String senha) {
     if (email.isEmpty || senha.isEmpty) {
+      erro = email.isEmpty
+          ? ErrorException(message: "Campo E-mail está vazio!")
+          : senha.isEmpty
+              ? ErrorException(message: "Campo Senha está vazio!")
+              : null;
       return false;
     }
     return true;

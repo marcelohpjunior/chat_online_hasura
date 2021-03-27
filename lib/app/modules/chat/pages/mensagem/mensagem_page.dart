@@ -48,7 +48,6 @@ class MensagemPageState extends State<MensagemPage> {
                 padding: const EdgeInsets.only(left: 20),
                 child: TextInputMensagemWidget(
                   onChanged: (text) {
-                    print(text);
                     a = text;
                   },
                   enviaMensagem: () {
