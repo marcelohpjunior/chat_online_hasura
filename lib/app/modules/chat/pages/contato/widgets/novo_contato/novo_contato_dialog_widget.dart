@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'novo_contato_store.dart';
+import 'novo_contato_controller.dart';
 
 class NovoContatoDialogWidget extends StatefulWidget {
   const NovoContatoDialogWidget({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class NovoContatoDialogWidget extends StatefulWidget {
 }
 
 class _NovoContatoDialogWidgetState
-    extends ModularState<NovoContatoDialogWidget, NovoContatoStore> {
+    extends ModularState<NovoContatoDialogWidget, NovoContatoController> {
   @override
   Widget build(BuildContext context) {
     var controller = TextEditingController();

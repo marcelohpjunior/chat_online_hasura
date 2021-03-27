@@ -2,14 +2,14 @@ import 'package:chat_online_hasura/app/shared/models/usuario_model.dart';
 import 'package:chat_online_hasura/app/shared/repositories/login/ilogin_repository.dart';
 import 'package:mobx/mobx.dart';
 
-part 'login_store.g.dart';
+part 'login_controller.g.dart';
 
-class LoginStore = _LoginStoreBase with _$LoginStore;
+class LoginController = _LoginControllerBase with _$LoginController;
 
-abstract class _LoginStoreBase with Store {
+abstract class _LoginControllerBase with Store {
   final ILoginRepository repository;
 
-  _LoginStoreBase(this.repository);
+  _LoginControllerBase(this.repository);
 
   @observable
   int value = 0;

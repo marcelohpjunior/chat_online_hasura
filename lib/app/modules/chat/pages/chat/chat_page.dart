@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'chat_store.dart';
+import 'chat_controller.dart';
 
 class ChatPage extends StatefulWidget {
   final String title;
@@ -14,7 +14,7 @@ class ChatPage extends StatefulWidget {
   _ChatPageState createState() => _ChatPageState();
 }
 
-class _ChatPageState extends ModularState<ChatPage, ChatStore> {
+class _ChatPageState extends ModularState<ChatPage, ChatController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

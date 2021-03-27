@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'novo_contato_store.dart';
+part of 'mensagem_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'novo_contato_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$NovoContatoStore on _NovoContatoStoreBase, Store {
-  final _$valueAtom = Atom(name: '_NovoContatoStoreBase.value');
+mixin _$MensagemController on _MensagemControllerBase, Store {
+  final _$valueAtom = Atom(name: '_MensagemControllerBase.value');
 
   @override
   int get value {
@@ -24,17 +24,17 @@ mixin _$NovoContatoStore on _NovoContatoStoreBase, Store {
     });
   }
 
-  final _$_NovoContatoStoreBaseActionController =
-      ActionController(name: '_NovoContatoStoreBase');
+  final _$_MensagemControllerBaseActionController =
+      ActionController(name: '_MensagemControllerBase');
 
   @override
   void increment() {
-    final _$actionInfo = _$_NovoContatoStoreBaseActionController.startAction(
-        name: '_NovoContatoStoreBase.increment');
+    final _$actionInfo = _$_MensagemControllerBaseActionController.startAction(
+        name: '_MensagemControllerBase.increment');
     try {
       return super.increment();
     } finally {
-      _$_NovoContatoStoreBaseActionController.endAction(_$actionInfo);
+      _$_MensagemControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'cadastro_store.dart';
+part of 'novo_contato_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'cadastro_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$CadastroStore on _CadastroStoreBase, Store {
-  final _$valueAtom = Atom(name: '_CadastroStoreBase.value');
+mixin _$NovoContatoController on _NovoContatoControllerBase, Store {
+  final _$valueAtom = Atom(name: '_NovoContatoControllerBase.value');
 
   @override
   int get value {
@@ -24,17 +24,17 @@ mixin _$CadastroStore on _CadastroStoreBase, Store {
     });
   }
 
-  final _$_CadastroStoreBaseActionController =
-      ActionController(name: '_CadastroStoreBase');
+  final _$_NovoContatoControllerBaseActionController =
+      ActionController(name: '_NovoContatoControllerBase');
 
   @override
   void increment() {
-    final _$actionInfo = _$_CadastroStoreBaseActionController.startAction(
-        name: '_CadastroStoreBase.increment');
+    final _$actionInfo = _$_NovoContatoControllerBaseActionController
+        .startAction(name: '_NovoContatoControllerBase.increment');
     try {
       return super.increment();
     } finally {
-      _$_CadastroStoreBaseActionController.endAction(_$actionInfo);
+      _$_NovoContatoControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 

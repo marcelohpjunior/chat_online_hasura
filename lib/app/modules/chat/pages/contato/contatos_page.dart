@@ -1,4 +1,4 @@
-import 'package:chat_online_hasura/app/modules/chat/pages/contato/contatos_store.dart';
+import 'package:chat_online_hasura/app/modules/chat/pages/contato/contatos_controller.dart';
 import 'package:chat_online_hasura/app/modules/chat/pages/contato/widgets/novo_contato/novo_contato_dialog_widget.dart';
 import 'package:chat_online_hasura/app/modules/chat/widgets/lista_contatos_widget.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ class ContatosPage extends StatefulWidget {
   ContatosPageState createState() => ContatosPageState();
 }
 
-class ContatosPageState extends ModularState<ContatosPage, ContatosStore> {
+class ContatosPageState extends ModularState<ContatosPage, ContatosController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

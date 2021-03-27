@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'contatos_store.dart';
+part of 'contatos_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'contatos_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$ContatosStore on _ContatosStoreBase, Store {
-  final _$valueAtom = Atom(name: '_ContatosStoreBase.value');
+mixin _$ContatosController on _ContatosControllerBase, Store {
+  final _$valueAtom = Atom(name: '_ContatosControllerBase.value');
 
   @override
   int get value {
@@ -24,17 +24,17 @@ mixin _$ContatosStore on _ContatosStoreBase, Store {
     });
   }
 
-  final _$_ContatosStoreBaseActionController =
-      ActionController(name: '_ContatosStoreBase');
+  final _$_ContatosControllerBaseActionController =
+      ActionController(name: '_ContatosControllerBase');
 
   @override
   void increment() {
-    final _$actionInfo = _$_ContatosStoreBaseActionController.startAction(
-        name: '_ContatosStoreBase.increment');
+    final _$actionInfo = _$_ContatosControllerBaseActionController.startAction(
+        name: '_ContatosControllerBase.increment');
     try {
       return super.increment();
     } finally {
-      _$_ContatosStoreBaseActionController.endAction(_$actionInfo);
+      _$_ContatosControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 

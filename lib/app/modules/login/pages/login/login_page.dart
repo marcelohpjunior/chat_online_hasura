@@ -1,8 +1,9 @@
-import 'package:chat_online_hasura/app/modules/login/pages/login/login_store.dart';
 import 'package:chat_online_hasura/app/shared/widgets/text_border_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import 'login_controller.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
@@ -11,7 +12,7 @@ class LoginPage extends StatefulWidget {
   LoginPageState createState() => LoginPageState();
 }
 
-class LoginPageState extends ModularState<LoginPage, LoginStore> {
+class LoginPageState extends ModularState<LoginPage, LoginController> {
   var email = '';
   var senha = '';
   @override
