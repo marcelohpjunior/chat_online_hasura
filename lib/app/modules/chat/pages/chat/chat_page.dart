@@ -38,7 +38,7 @@ class _ChatPageState extends ModularState<ChatPage, ChatController> {
           return true;
         },
         child: Observer(builder: (context) {
-          print(store.counter);
+          print(controller.counter);
           return ListaContatosWidget(
             onTap: () {
               Modular.to.pushNamed('mensagem');
@@ -49,7 +49,7 @@ class _ChatPageState extends ModularState<ChatPage, ChatController> {
               print("foto perfil");
             },
             showQtdMensagem: true,
-            qtdMensagem: store.counter,
+            qtdMensagem: controller.counter,
           );
         }),
       ),

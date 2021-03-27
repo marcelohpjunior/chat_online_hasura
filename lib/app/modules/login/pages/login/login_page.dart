@@ -75,7 +75,7 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
                   ),
                 ),
                 Observer(builder: (_) {
-                  if (store.carregando)
+                  if (controller.carregando)
                     return Padding(
                       padding: const EdgeInsets.only(top: 30),
                       child: CircularProgressIndicator(),
@@ -85,13 +85,14 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
                     padding: const EdgeInsets.only(top: 40),
                     child: ElevatedButton(
                       onPressed: () async {
-                        store.setCarregando(true);
+                        controller.setCarregando(true);
 
-                        await store.entrar(email, senha);
+                        await controller.entrar(email, senha);
 
-                        store.setCarregando(false);
+                        controller.setCarregando(false);
 
-                        if (store.erro == null && store.usuarioModel != null) {
+                        if (controller.erro == null &&
+                            controller.usuarioModel != null) {
                           Modular.to.navigate('/chat', replaceAll: true);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -105,7 +106,7 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
                             ),
                           );
                         }
-                        print(store.usuarioModel?.email);
+                        print(controller.usuarioModel?.email);
                       },
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(

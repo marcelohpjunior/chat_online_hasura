@@ -26,7 +26,7 @@ class _NovoContatoDialogWidgetState
     extends ModularState<NovoContatoDialogWidget, NovoContatoController> {
   @override
   Widget build(BuildContext context) {
-    var controller = TextEditingController();
+    var textEditingController = TextEditingController();
     var _contato = "";
     return Observer(builder: (context) {
       return SimpleDialog(key: widget.key, children: <Widget>[
@@ -43,9 +43,9 @@ class _NovoContatoDialogWidgetState
                       Row(
                         children: [
                           Radio(
-                            groupValue: store.value,
+                            groupValue: controller.value,
                             onChanged: (int? value) {
-                              store.value = value ?? 0;
+                              controller.value = value ?? 0;
                             },
                             value: 0,
                           ),
@@ -57,9 +57,9 @@ class _NovoContatoDialogWidgetState
                         child: Row(
                           children: [
                             Radio(
-                              groupValue: store.value,
+                              groupValue: controller.value,
                               onChanged: (int? value) {
-                                store.value = value ?? 0;
+                                controller.value = value ?? 0;
                               },
                               value: 1,
                             ),
@@ -73,14 +73,15 @@ class _NovoContatoDialogWidgetState
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: 500),
                   child: TextBorderInputWidget(
-                      textEditingController: controller,
+                      textEditingController: textEditingController,
                       onChanged: (text) {
                         _contato = text;
                         print(text);
                       },
-                      labelText: store.value == 0 ? "E-mail" : "Telefone",
-                      hintText:
-                          store.value == 0 ? "email@email.com" : "ddd + número",
+                      labelText: controller.value == 0 ? "E-mail" : "Telefone",
+                      hintText: controller.value == 0
+                          ? "email@email.com"
+                          : "ddd + número",
                       keyboardType: TextInputType.text),
                 ),
                 Padding(
@@ -103,7 +104,7 @@ class _NovoContatoDialogWidgetState
                         onPressed: () {
                           print("Contato $_contato Adicionado");
                           _contato = "";
-                          controller.text = "";
+                          textEditingController.text = "";
                           Modular.to.pop();
                         },
                         child: Text(
