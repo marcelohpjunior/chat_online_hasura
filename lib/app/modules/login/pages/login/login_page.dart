@@ -1,3 +1,4 @@
+import 'package:chat_online_hasura/app/shared/stores/usuario/usuario_store.dart';
 import 'package:chat_online_hasura/app/shared/widgets/text_border_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -85,21 +86,18 @@ class LoginPageState extends ModularState<LoginPage, LoginController> {
                     padding: const EdgeInsets.only(top: 40),
                     child: ElevatedButton(
                       onPressed: () async {
-                        controller.setCarregando(true);
+                        try {
+                          await controller.entrar(email, senha);
 
-                        await controller.entrar(email, senha);
-
-                        controller.setCarregando(false);
-
-                        if (controller.erro == null &&
-                            controller.usuario != null) {
-                          Modular.to.navigate('/chat', replaceAll: true);
-                        } else {
+                          if (controller.usuarioStore.usuario != null) {
+                            Modular.to.navigate('/chat', replaceAll: true);
+                          }
+                        } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               backgroundColor: Colors.red,
                               content: Text(
-                                controller.erro.toString(),
+                                e.toString(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: Colors.white),
                               ),

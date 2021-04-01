@@ -1,5 +1,7 @@
+import 'package:chat_online_hasura/app/modules/login/pages/cadastro/cadastro_controller.dart';
 import 'package:chat_online_hasura/app/shared/widgets/text_border_input_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class CadastroPage extends StatefulWidget {
@@ -9,7 +11,12 @@ class CadastroPage extends StatefulWidget {
   CadastroPageState createState() => CadastroPageState();
 }
 
-class CadastroPageState extends State<CadastroPage> {
+class CadastroPageState extends ModularState<CadastroPage, CadastroController> {
+  var email = '';
+  var senha = '';
+  var nome = '';
+  var sobrenome = '';
+  var telefone = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +35,7 @@ class CadastroPageState extends State<CadastroPage> {
                     constraints: BoxConstraints(maxWidth: 500),
                     child: TextBorderInputWidget(
                       onChanged: (text) {
-                        print(text);
+                        nome = text;
                       },
                       labelText: "Nome",
                       hintText: "João",
@@ -42,7 +49,7 @@ class CadastroPageState extends State<CadastroPage> {
                     constraints: BoxConstraints(maxWidth: 500),
                     child: TextBorderInputWidget(
                         onChanged: (text) {
-                          print(text);
+                          sobrenome = text;
                         },
                         labelText: "Sobrenome",
                         hintText: "Silva",
@@ -55,7 +62,7 @@ class CadastroPageState extends State<CadastroPage> {
                     constraints: BoxConstraints(maxWidth: 500),
                     child: TextBorderInputWidget(
                       onChanged: (text) {
-                        print(text);
+                        telefone = text;
                       },
                       labelText: "Telefone",
                       hintText: "ddd + número",
@@ -69,7 +76,7 @@ class CadastroPageState extends State<CadastroPage> {
                     constraints: BoxConstraints(maxWidth: 500),
                     child: TextBorderInputWidget(
                       onChanged: (text) {
-                        print(text);
+                        email = text;
                       },
                       labelText: "E-mail",
                       hintText: "email@email.com",
@@ -83,7 +90,7 @@ class CadastroPageState extends State<CadastroPage> {
                     constraints: BoxConstraints(maxWidth: 500),
                     child: TextBorderInputWidget(
                       onChanged: (text) {
-                        print(text);
+                        senha = text;
                       },
                       labelText: "Senha",
                       hintText: "********",
@@ -92,30 +99,57 @@ class CadastroPageState extends State<CadastroPage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 40, bottom: 20),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Modular.to.navigate('/chat', replaceAll: true);
-                    },
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).accentColor)),
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(minWidth: 100),
-                      child: Container(
-                        child: Text(
-                          "Confirmar",
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColorDark,
-                            fontWeight: FontWeight.bold,
+                Observer(builder: (context) {
+                  if (controller.carregando) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 40, bottom: 20),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        try {
+                          await controller.cadastrar(
+                              email, senha, nome, sobrenome, telefone);
+
+                          if (controller.usuarioStore.usuario != null) {
+                            Modular.to.navigate('/chat', replaceAll: true);
+                          }
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Colors.red,
+                              content: Text(
+                                e.toString(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Theme.of(context).accentColor)),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(minWidth: 100),
+                        child: Container(
+                          child: Text(
+                            "Confirmar",
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColorDark,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                }),
               ],
             ),
           ),

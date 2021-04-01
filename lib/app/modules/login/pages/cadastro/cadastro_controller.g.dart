@@ -9,39 +9,43 @@ part of 'cadastro_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CadastroController on _CadastroControllerBase, Store {
-  final _$valueAtom = Atom(name: '_CadastroControllerBase.value');
+  final _$carregandoAtom = Atom(name: '_CadastroControllerBase.carregando');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  bool get carregando {
+    _$carregandoAtom.reportRead();
+    return super.carregando;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set carregando(bool value) {
+    _$carregandoAtom.reportWrite(value, super.carregando, () {
+      super.carregando = value;
     });
   }
 
-  final _$_CadastroControllerBaseActionController =
-      ActionController(name: '_CadastroControllerBase');
+  final _$cadastrarAsyncAction =
+      AsyncAction('_CadastroControllerBase.cadastrar');
 
   @override
-  void increment() {
-    final _$actionInfo = _$_CadastroControllerBaseActionController.startAction(
-        name: '_CadastroControllerBase.increment');
-    try {
-      return super.increment();
-    } finally {
-      _$_CadastroControllerBaseActionController.endAction(_$actionInfo);
-    }
+  Future cadastrar(String email, String senha, String nome, String sobrenome,
+      String telefone) {
+    return _$cadastrarAsyncAction
+        .run(() => super.cadastrar(email, senha, nome, sobrenome, telefone));
+  }
+
+  final _$setCarregandoAsyncAction =
+      AsyncAction('_CadastroControllerBase.setCarregando');
+
+  @override
+  Future setCarregando(bool carregar) {
+    return _$setCarregandoAsyncAction.run(() => super.setCarregando(carregar));
   }
 
   @override
   String toString() {
     return '''
-value: ${value}
+carregando: ${carregando}
     ''';
   }
 }
